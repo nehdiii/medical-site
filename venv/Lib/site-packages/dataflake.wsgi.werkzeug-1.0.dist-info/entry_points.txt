@@ -1,0 +1,7 @@
+[console_scripts]
+mkwerkzeuginstance = dataflake.wsgi.werkzeug.configurator:mkzope
+
+[paste.server_runner]
+debugger = dataflake.wsgi.werkzeug:serve_debugger
+main = dataflake.wsgi.werkzeug:serve_paste
+

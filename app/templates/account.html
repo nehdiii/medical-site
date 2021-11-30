@@ -1,0 +1,80 @@
+{% extends "layout.html "%}
+{% block content %}
+    <div class="content-section">
+        <div class="media">
+            <img class="rounded-circle account-img" src="{{url_for('static',filename='profile_pics/' + current_user.image_file) }}">
+            <div class="media-body">
+                <h2 class="account-heading">{{ user.username }}</h2>
+                <p class="text-secondary">{{ user.workpost }}</p>
+                <p class="text-secondary">{{ user.email }}</p>
+
+            </div>
+        </div>
+    </div>
+<h2 class="account-heading">Cours Créés</h2>
+     {% for course,chp in team %}
+
+
+<hr class="featurette-divider" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+
+        <div class="row featurette">
+          <div class="col-md-7 order-md-2">
+              <h2 class="featurette-heading"><a href="{{ url_for('course',course_id=course.id,chapter_id=chp.id) }}" > {{ course.title }}</a> </br> <small class="text-muted"><a href="{{ url_for('account',user_id=course.doctor.id) }}" >{{ course.doctor.username }}</a></small></span></h2>
+              <small class="text-muted">{{ course.date_posted.strftime('%Y-%m-%d') }}</small>
+              </br></br>
+            <p class="lead">{{ course.intro }}</p>
+
+              {% if course.doctor == current_user %}
+                    <div>
+                        <a class="btn btn-dark" href="{{ url_for('update_course',course_id = course.id) }}">Mettre à jour un cours </a>
+                        <a class="btn btn-dark" href="{{ url_for('new_chapter',course_id = course.id) }}"> Ajouter un chapitre </a>
+                        <button class="btn btn-danger" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="Are you sure to delete this post?">Supprimer un cours</button>
+                    </div>
+            {% endif %}
+
+
+
+          </div>
+
+
+
+          <div class="col-md-5 order-md-1">
+
+                 <img class="img-thumbnail" src="{{ url_for('static',filename='course_pics/' + course.image_file ) }}">
+
+
+          </div>
+
+        </div>
+<div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+  <div class="offcanvas-header">
+    <h5 id="offcanvasTopLabel">Voulez-vous vraiment supprimer ce cours?</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+     <div class="modal-footer">
+
+                  <form action="{{ url_for('delete_course', course_id=course.id) }}" method="POST">
+                    <input class="btn btn-danger" type="submit" value="Supprimer">
+                  </form>
+                </div>
+              </div>
+
+</div>
+
+    {% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock content %}

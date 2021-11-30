@@ -1,0 +1,57 @@
+{% extends "layout.html "%}
+{% block content1 %}
+  <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+      </style>
+
+<div class="p-5 mb-4 bg-light rounded-3">
+      <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">Hospital x</h1>
+        <p class="col-md-8 fs-4">Votre meilleure plateforme pour aider notre nouveau personnel à faire face à la pandémie. Vous pouvez publier des cours et les modifier.</p>
+
+      </div>
+    </div>
+
+        <link href="C:\Users\DELL\PycharmProjects\MedicalSite\app\static\assets\dist\css\bootstrap.min.css" rel="stylesheet">
+    <div class="row align-items-md-stretch">
+      <div class="col-md-6">
+        <div class="h-100 p-5 text-white bg-dark rounded-3">
+          <h2>Ajouter un cours</h2>
+          <p>Cette option vous aide à ajouter des cours. Les membres du staff médical peuvent y accéder.</p>
+            <a class="btn btn-outline-secondary" href="{{ url_for('new_course') }}">Créer un cours</a>
+        </div>
+      </div>
+
+
+         <div class="col-md-6">
+        <div class="h-100 p-5 bg-light border rounded-3">
+          <h2>Ajouter un chapitre.</h2>
+          <p>Cette option vous aide à personnaliser votre cours et y ajouter des chapitres.</p>
+             <a class="btn btn-outline-secondary" href="{{ url_for('new_chapter1') }}">Créer un chapitre</a>
+
+
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+{% endblock content1 %}

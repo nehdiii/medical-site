@@ -1,0 +1,80 @@
+{% extends "layout.html "%}
+{% block listcourse %}
+ <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+  <link href="C:\Users\DELL\PycharmProjects\MedicalSite\app\static\sidebars.css" rel="stylesheet">
+
+  <link href="C:\Users\DELL\PycharmProjects\MedicalSite\app\static\assets\dist\css\bootstrap.min.css" rel="stylesheet">
+
+ <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white" style="width: 380px;">
+    <p class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
+      <svg class="bi me-2" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
+      <span class="fs-5 fw-semibold">Chapters List</span>
+    </p>
+ </div>
+
+    {% for chapter in chapters %}
+
+
+    <div class="list-group list-group-flush border-bottom scrollarea"  style="width: 380px; float:left; " >
+
+
+
+
+      <a href="{{ url_for('course',course_id=course.id,chapter_id=chapter.id) }}"  class="list-group-item list-group-item-action py-3 lh-tight" type="{{chapter.id}}">
+        <div class="d-flex w-100 align-items-center justify-content-between">
+          <strong class="mb-1">{{ chapter.title }}</strong>
+          <small class="text-muted">{{ chapter.date_posted.strftime('%Y-%m-%d') }}</small>
+        </div>
+        <div class="col-10 mb-1 small">{{ chapter.intro }}</div>
+      </a>
+
+    </div>
+
+    {% endfor %}
+
+
+
+
+
+
+
+    <script src="C:\Users\DELL\PycharmProjects\MedicalSite\app\static\assets\dist\js\bootstrap.bundle.min.js"></script>
+
+    <script src="C:\Users\DELL\PycharmProjects\MedicalSite\app\static\sidebars.js"></script>
+    <script src="C:\Users\DELL\PycharmProjects\MedicalSite\app\static\changecourse.js"></script>
+
+
+
+{% endblock listcourse %}
+
+{% block content %}
+
+ <div class="row gx-5" >
+                  <div class="col"  style="dispaly:flex;justify-content:center;align-items:center;">
+
+
+                              <video width="600" controls>
+                                <source src="{{ url_for('static',filename='course_vids/' + exact_chapter.video_file ) }}" type="video/mp4">
+                              </video>
+                            <br/><br/>
+                        <a href="{{ url_for('static',filename='course_files/' + exact_chapter.pdf_file ) }}" download="true" >Download the course file</a>
+                  </div>
+
+            </div>
+{% endblock content %}
+

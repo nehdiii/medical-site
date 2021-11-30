@@ -1,0 +1,145 @@
+<!doctype html>
+<html>
+<head>
+     <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+
+    <link rel="stylesheet" href="{{ url_for('static',filename='bootstrap.css') }}" />
+    <link href="{{ url_for('static',filename='bootstrap.min.css') }}"  rel="stylesheet">
+    <link href="{{ url_for('static',filename='bootstrapinfo.css') }}"  rel="stylesheet">
+
+
+
+
+   <link href="{{ url_for('static',filename='owl.carousel.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='bootstrappro.css') }}"rel="stylesheet">
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="C:\Users\DELL\PycharmProjects\MedicalSite\app\static\homepage.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/album/">
+    <link href="C:\Users\DELL\PycharmProjects\MedicalSite\app\static\assets\dist\css\bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='main.css') }}">
+    {% if title %}
+        <title>Hospital x - {{title}}</title>
+    {% else %}
+        <title>Hospital x</title>
+    {% endif %}
+</head>
+<body>
+    <header class="site-header">
+      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+        <div class="container">
+          <a class="navbar-brand mr-4" href="/">Hospital x</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+                <a class="nav-item nav-link" href="{{ url_for('home') }}">Accueil</a>
+                <a class="nav-item nav-link" href="{{ url_for('courses') }}">Cours</a>
+                <a class="nav-item nav-link" href="{{ url_for('ASK') }}">Forums</a>
+
+                <a class="nav-item nav-link" href="{{ url_for('corona_dash') }}">Tableau De Bord Covid-19</a>
+                <a class="nav-item nav-link" href="{{ url_for('protocole') }}">Protocole De Soins</a>
+
+
+
+            </div>
+            <!-- Navbar Right Side -->
+            <div class="navbar-nav">
+                {% if current_user.is_authenticated and current_user.workpost == "doctor" %}
+                    <a class="nav-item nav-link" href="{{ url_for('costum_course') }}">Cours Personnalisé</a>
+
+                    <a class="nav-item nav-link" href="{{ url_for('new_post') }}">Nouvelle Publication</a>
+
+                    <a class="nav-item nav-link" href="{{ url_for('account',user_id=current_user.id) }}">Compte</a>
+                    <a class="nav-item nav-link" href="{{ url_for('updateaccount') }}"> Compte mis à jour</a>
+                    <a class="nav-item nav-link" href="{{ url_for('logout') }}">Se déconnecter</a>
+                {% elif current_user.is_authenticated and current_user.workpost == "new personel" %}
+                    <a class="nav-item nav-link" href="{{ url_for('new_post') }}">Nouvelle Publication</a>
+                    <a class="nav-item nav-link" href="{{ url_for('account',user_id=current_user.id) }}">Compte</a>
+                    <a class="nav-item nav-link" href="{{ url_for('updateaccount') }}"> Compte mis à jour</a>
+                    <a class="nav-item nav-link" href="{{ url_for('logout') }}">Se déconnecter</a>
+                {% else %}
+                    <a class="nav-item nav-link" href="{{ url_for('login') }}">Se Connecter</a>
+                    <a class="nav-item nav-link" href="{{ url_for('register') }}">Inscription</a>
+                {% endif %}
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main role="main" class="container">
+      <div class="row">
+        <div class="col-md-8">
+           {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category,message in messages %}
+                        <div class="alert alert-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor%}
+                {% endif %}
+            {% endwith %}
+           {% block listcourse %}{% endblock listcourse %}
+
+          {% block content %}{% endblock content %}
+
+
+        </div>
+
+
+      </div>
+
+    </main>
+    {% block content1 %}{% endblock content1 %}
+    <div class="container">
+  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <div class="col-md-4 d-flex align-items-center">
+      <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+        <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
+      </a>
+      <span class="text-muted">© 2021 Company, Inc</span>
+    </div>
+
+
+
+          <br/>
+          <span class="text-muted"><small>Notre Email:</small><a class="text-muted" href="#"><img src="{{url_for('static',filename='img/' + 'mail.png') }}"  class="d-block w-100" style="height:50px;"> </a></span>
+          <br/>
+          <span class="text-muted"><small>Facebook:</small><a class="text-muted" href="#"><img src="{{url_for('static',filename='img/' + 'fb.png') }}"  class="d-block w-100" style="height:50px;"> </a></span>
+          <br/>
+          <span class="text-muted"><small>Instagram:</small><a class="text-muted" href="#"><img src="{{url_for('static',filename='img/' + 'insta.png') }}"  class="d-block w-100" style="height:50px;"> </a></span>
+
+
+  </footer>
+</div>
+
+
+
+
+
+
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+    -->
+
+    <script src="/docs/5.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+
+      <script src="sidebars.js"></script>
+</body>
+</html>

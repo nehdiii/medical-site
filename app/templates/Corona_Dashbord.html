@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+
+
+
+
+{% block content %}
+<div class="site-header-logo">
+    <h1>
+         Tableau de bord pour le suivi du Corona en Tunisie
+    </h1>
+    <h1 class="card-title pricing-card-title">Mises à jour : <small class="text-muted fw-light">{{ corona.date.strftime('%Y-%m-%d')}}</small></h1>
+
+    <br/>
+    <br/>
+
+
+</div>
+<div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+    <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm">
+          <div class="card-header py-3">
+            <h4 class="my-0 fw-normal">Contaminations</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title"><small class="text-muted fw-light">{{ corona.confirmed }}</small></h1>
+
+          </div>
+        </div>
+      </div>
+     <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm">
+          <div class="card-header py-3">
+            <h4 class="my-0 fw-normal">Décès</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title"><small class="text-muted fw-light">{{ corona.deaths }}</small></h1>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm">
+          <div class="card-header py-3">
+            <h4 class="my-0 fw-normal">Guérisons</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title"><small class="text-muted fw-light">{{ corona.recoverd }}</small></h1>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+</div>
+
+<div class="row p-4">
+    <div class="card m-auto" style="width: 90;">
+        <div class="card-body">
+            <div id="chart1"></div>
+            <p>Nuage de points</p>
+        </div>
+    </div>
+</div>
+<div class="row p-4">
+    <div class="card m-auto" style="width: 90;">
+        <div class="card-body">
+            <div id="chart2"></div>
+            <p> Histogramme </p>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- plotly cdn -->
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script>
+    var graph1 = {{ graph1JSON | safe}} ;
+    Plotly.plot("chart1",graph1,{})
+    var graph2 = {{ graph2JSON | safe}} ;
+    Plotly.plot("chart2",graph2,{})
+</script>
+{% endblock %}

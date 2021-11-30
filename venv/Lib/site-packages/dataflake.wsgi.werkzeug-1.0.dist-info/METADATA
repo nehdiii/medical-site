@@ -1,0 +1,85 @@
+Metadata-Version: 2.1
+Name: dataflake.wsgi.werkzeug
+Version: 1.0
+Summary: PasteDeploy entry point for the werkzeug WSGI server
+Home-page: https://github.com/dataflake/dataflake.wsgi.werkzeug
+Author: Jens Vagelpohl and Contributors
+Author-email: jens@netz.ooo
+License: ZPL 2.1
+Project-URL: Documentation, https://dataflakewsgiwerkzeug.readthedocs.io
+Project-URL: Issue Tracker, https://github.com/dataflake/dataflake.wsgi.werkzeug/issues
+Project-URL: Sources, https://github.com/dataflake/dataflake.wsgi.werkzeug
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Web Environment
+Classifier: Framework :: CherryPy
+Classifier: Framework :: Zope
+Classifier: Framework :: Zope :: 4
+Classifier: Intended Audience :: System Administrators
+Classifier: License :: OSI Approved :: Zope Public License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Topic :: Internet :: WWW/HTTP :: WSGI
+Requires-Python: >=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*
+Requires-Dist: setuptools
+Requires-Dist: werkzeug
+Requires-Dist: Zope
+Requires-Dist: ipaddress ; python_version == "2.7"
+Provides-Extra: docs
+Requires-Dist: sphinx-rtd-theme ; extra == 'docs'
+Requires-Dist: Sphinx (<2) ; (python_version < "3") and extra == 'docs'
+Requires-Dist: Sphinx ; (python_version >= "3") and extra == 'docs'
+
+.. image:: https://travis-ci.com/dataflake/dataflake.wsgi.werkzeug.svg?branch=master
+   :target: https://travis-ci.com/dataflake/dataflake.wsgi.werkzeug
+
+.. image:: https://coveralls.io/repos/github/dataflake/dataflake.wsgi.werkzeug/badge.svg?branch=master
+   :target: https://coveralls.io/github/dataflake/dataflake.wsgi.werkzeug?branch=master
+
+.. image:: https://readthedocs.org/projects/dataflakewsgiwerkzeug/badge/?version=latest
+   :target: https://dataflakewsgiwerkzeug.readthedocs.io/en/latest/?badge=latest
+   :alt: Documentation Status
+
+.. image:: https://img.shields.io/pypi/v/dataflake.wsgi.werkzeug.svg
+   :target: https://pypi.org/project/dataflake.wsgi.werkzeug/
+   :alt: Current version on PyPI
+
+.. image:: https://img.shields.io/pypi/pyversions/dataflake.wsgi.werkzeug.svg
+   :target: https://pypi.org/project/dataflake.wsgi.werkzeug/
+   :alt: Supported Python versions
+
+
+dataflake.wsgi.werkzeug
+======================
+
+This package provides a PasteDeploy-compatible entry point to easily integrate
+the `werkzeug WSGI server <https://werkzeug.palletsprojects.com>`_ into an
+environment that uses PasteDeploy-style ``.ini`` files to compose a WSGI
+application.
+
+A second entry point will enable the ``werkzeug`` debugger, so you get nice
+clickable tracebacks with the ability to open a console prompt at any point in
+the stack. The debugger is `explained in the werkzeug documentation 
+<https://werkzeug.palletsprojects.com/debug/>`_ and **should never be running 
+in production**.
+
+It also includes a script to create a basic WSGI configuration file for Zope,
+similar to Zope's own ``mkwsgiinstance``, but specifying ``werkzeug`` instead of
+``waitress`` as WSGI server.
+
+
+Changelog
+=========
+
+1.0 (2019-04-24)
+----------------
+- Initial release
+
+
